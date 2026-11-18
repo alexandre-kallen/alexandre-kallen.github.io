@@ -1,0 +1,27 @@
+# Robots ordinaires : tout le site, sauf les comptes rendus de TP
+User-agent: *
+Disallow: /assets/reports/TP1_plasma_froid_RF.pdf
+Disallow: /assets/reports/TP2_arc_electrique.pdf
+Disallow: /assets/reports/TP3_plasma_helicon.pdf
+Disallow: /assets/reports/Report_T7002T.pdf
+Disallow: /assets/reports/Report_T7004T.pdf
+Disallow: /assets/reports/Rapport_Colaminage.pdf
+Disallow: /assets/reports/Projet_D0fus.pdf
+Disallow: /assets/cv/
+Allow: /
+
+# Google Images : seules les images listées ci-dessous sont autorisées
+# (les photos de la section Formation sont affichées en miniature : on autorise la miniature ET l'original)
+User-agent: Googlebot-Image
+Disallow: /assets/
+Allow: /assets/img/projets/revetement-nitrure-de-titane-tin.jpg
+Allow: /assets/img/projets/plasma-helicon-argon-sonde-langmuir.jpg
+Allow: /assets/img/projets/plasma-froid-radiofrequence-13-56-mhz.jpg
+Allow: /assets/img/projets/d0fus-cartes-faisabilite.jpg
+Allow: /assets/img/formation/cea-cadarache-visite-iter-2024.jpg
+Allow: /assets/img/formation/cea-cadarache-visite-iter-2024-mini.jpg
+Allow: /assets/img/formation/master-ppef-tokamak-west-cea-cadarache-2026.jpg
+Allow: /assets/img/formation/master-ppef-tokamak-west-cea-cadarache-2026-mini.jpg
+Allow: /assets/media/simulation-phare-reconnexion-magnetique.jpg
+
+Sitemap: https://alexandre-kallen.github.io/sitemap.xml
