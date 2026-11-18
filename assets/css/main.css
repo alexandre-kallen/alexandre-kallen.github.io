@@ -162,11 +162,13 @@ h6 {
   margin-right: 8px;
 }
 
-.header .logo h1 {
+.header .logo .sitename {
   font-size: 30px;
   margin: 0;
   font-weight: 700;
   color: var(--heading-color);
+  font-family: var(--heading-font);
+  line-height: 1.2;
 }
 
 .scrolled .header {
@@ -1738,11 +1740,4 @@ section,
 
 .contact .php-email-form button[type=submit]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 25%);
-}
-
-/*--------------------------------------------------------------
-# Starter Section Section
---------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
 }

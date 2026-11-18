@@ -85,11 +85,32 @@
 .navmenu li.lang-switch a.lang-current { color: var(--nav-hover-color); }
 @media (min-width: 1200px) { .navmenu li.lang-switch { margin-left: 18px; padding-left: 12px; border-left: 1px solid color-mix(in srgb, var(--nav-color), transparent 70%); } }
 @media (max-width: 1199px) { .navmenu li.lang-switch { padding: 10px 20px; } .navmenu li.lang-switch span { color: #999; } .navmenu li.lang-switch a { padding: 0 6px; } }
-.header .logo h1 { white-space: nowrap; }
+/* Mobile : le sélecteur FR | EN | DE est une <ul> imbriquée, que le template masque
+   (.navmenu ul { display:none; position:absolute… } s'applique à toutes les <ul> sous 1200px).
+   On la réaffiche en ligne et on annule le style "panneau" du menu déroulant. */
+@media (max-width: 1199px) {
+  .navmenu li.lang-switch > ul {
+    display: flex; align-items: center;
+    position: static; inset: auto; z-index: auto;
+    padding: 0; margin: 0; overflow: visible;
+    background: none; border: 0; border-radius: 0;
+  }
+}
+.header .logo .sitename { white-space: nowrap; }
 @media (min-width: 1200px) and (max-width: 1399px) {
-  .header .logo h1 { font-size: 26px; }
+  .header .logo .sitename { font-size: 26px; }
   .navmenu li { padding-left: 11px !important; padding-right: 11px !important; }
   .navmenu li.lang-switch { margin-left: 10px; padding-left: 10px !important; }
+}
+/* Avec 4 langues (FR | EN | DE | ZH), le menu est plus long : on le compacte entre 1200 et 1439 px
+   pour que le sélecteur reste entièrement visible (surtout en FR et DE, dont les libellés sont longs). */
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .header .logo .sitename { font-size: 22px; }
+  .header .logo img { max-height: 30px; margin-right: 6px; }
+  .navmenu > ul > li { padding-left: 7px !important; padding-right: 7px !important; }
+  .navmenu a, .navmenu a:focus { font-size: 14px; }
+  .navmenu li.lang-switch { margin-left: 6px; padding-left: 6px !important; }
+  .navmenu li.lang-switch a { padding-left: 4px; padding-right: 4px; }
 }
 html[lang="zh-CN"] {
   --default-font: "Roboto", "Noto Sans SC", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
@@ -192,3 +213,215 @@ html[lang="zh-CN"] .features2 .tab-pane h3, html[lang="zh-CN"] .projects .projec
 #navmenu .lang-switch .lang-item > a::after {
   content: none !important;
 }
+
+/* ---- Contact : pastille "références" + pictos cliquables ---- */
+.contact .references-note {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 22px; border-radius: 50px;
+  border: 1.5px solid var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 92%);
+  color: var(--heading-color); font-weight: 600; font-size: 15px;
+}
+.contact .references-note i { color: var(--accent-color); font-size: 20px; }
+.contact .info-item .info-icon { flex-shrink: 0; display: block; }
+
+/* ---- Langues : annule le chevauchement du gabarit sous le titre ---- */
+#langues .section-heading { margin-bottom: 48px; }
+#langues .stats-item { margin-top: 0; }
+
+/* ---- Projets : groupes, boutons rapport, boutons alignés en bas de carte ---- */
+.projects .project-group {
+  font-size: 22px; font-weight: 700; color: var(--heading-color);
+  margin: 40px 0 20px; padding-bottom: 8px;
+  border-bottom: 2px solid color-mix(in srgb, var(--accent-color), transparent 65%);
+}
+.projects .section-heading + .project-group { margin-top: 0; }
+.projects .project-body { display: flex; flex-direction: column; flex: 1; }
+.projects .project-links { margin-top: auto; padding-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+.projects .project-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 18px; border-radius: 50px;
+  border: 1.5px solid var(--accent-color);
+  color: var(--heading-color); font-weight: 600; font-size: 14px; transition: .3s;
+}
+.projects .project-link i { color: var(--accent-color); font-size: 18px; transition: .3s; }
+.projects .project-link:hover { background: var(--accent-color); color: var(--contrast-color); }
+.projects .project-link:hover i { color: var(--contrast-color); }
+
+/* Image qui doit rester entière (schéma, graphe) au lieu d'être rognée */
+.projects .project-img.contain { object-fit: contain; background: #fff; }
+
+
+/* ---- Pied de page : 3 colonnes ---- */
+.footer .footer-links ul li { padding: 7px 0; }
+.footer .footer-links ul i { font-size: 16px; padding-right: 8px; color: var(--accent-color); line-height: 1; }
+.footer .footer-links ul li > i.bi-chevron-right { font-size: 12px; padding-right: 6px; }
+.footer .footer-links ul a, .footer .footer-links ul span { line-height: 1.3; }
+.footer .footer-contact ul span { color: color-mix(in srgb, var(--default-color), transparent 30%); }
+.footer .footer-top { padding-bottom: 10px; }
+
+/* ---- Photo de profil : forme "patate" par CSS, image source carrée ---- */
+.hero .hero-img img {
+  border-radius: 0 !important;
+  clip-path: polygon(99.6% 48.5%, 99.8% 52.7%, 99.9% 56.9%, 99.6% 61.2%, 99.3% 65.6%, 98.3% 70.0%, 96.4% 74.0%, 93.4% 77.3%, 89.0% 79.5%, 84.4% 80.9%, 79.9% 81.9%, 75.7% 82.6%, 71.7% 83.1%, 68.0% 83.8%, 64.6% 84.5%, 61.4% 85.6%, 58.2% 86.9%, 54.8% 88.6%, 51.2% 90.7%, 47.2% 93.6%, 42.5% 96.7%, 37.3% 99.1%, 32.2% 99.6%, 27.3% 98.5%, 23.0% 96.3%, 19.0% 93.4%, 15.6% 89.9%, 12.4% 86.4%, 9.6% 82.6%, 7.2% 78.6%, 5.2% 74.5%, 3.6% 70.2%, 2.2% 65.9%, 0.9% 61.7%, 0.2% 57.3%, -0.1% 52.9%, 0.5% 48.5%, 1.4% 44.3%, 3.4% 40.3%, 5.5% 36.6%, 8.3% 33.3%, 11.0% 30.2%, 13.6% 27.3%, 16.1% 24.5%, 18.5% 21.8%, 21.0% 19.0%, 23.2% 16.0%, 25.6% 12.9%, 28.4% 9.9%, 31.3% 6.8%, 34.6% 4.0%, 38.4% 1.8%, 42.6% 0.7%, 46.9% -0.1%, 51.2% -0.0%, 55.5% 0.4%, 59.8% 0.9%, 64.1% 1.6%, 68.4% 2.5%, 72.7% 3.5%, 77.1% 4.7%, 81.4% 6.4%, 85.8% 8.3%, 89.8% 10.9%, 93.4% 14.0%, 95.9% 18.0%, 97.6% 22.4%, 98.6% 26.9%, 99.1% 31.5%, 99.3% 36.0%, 99.6% 40.2%, 99.6% 44.4%);
+}
+
+
+/* ---- Profil : explorateur des 4 domaines ---- */
+.profile-explorer { position: relative; margin-top: 40px; border-radius: 14px; overflow: hidden; color: #fff; box-shadow: 0 8px 30px rgba(8,0,94,.25); background: #08005e; }
+.profile-explorer .pe-bg, .profile-explorer .pe-overlay { position: absolute; inset: 0; }
+.profile-explorer .pe-bg-layer { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity .7s ease; }
+.profile-explorer .pe-bg-layer.is-active { opacity: 1; }
+.profile-explorer .pe-overlay { background: linear-gradient(180deg, rgba(8,0,94,.55) 0%, rgba(8,0,94,.82) 100%); }
+.profile-explorer .pe-inner { position: relative; z-index: 2; padding: 28px; }
+.profile-explorer .pe-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+.profile-explorer .pe-tab {
+  display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;
+  padding: 14px 10px; border-radius: 10px; cursor: pointer; color: #fff; font-weight: 600; font-size: 15px;
+  background: rgba(255,255,255,.12); border: 1.5px solid rgba(255,255,255,.35);
+  backdrop-filter: blur(4px); transition: .25s;
+}
+.profile-explorer .pe-tab i { font-size: 26px; color: var(--accent-color); transition: .25s; }
+.profile-explorer .pe-tab:hover { background: rgba(255,255,255,.22); }
+.profile-explorer .pe-tab.is-active { background: var(--accent-color); border-color: var(--accent-color); }
+.profile-explorer .pe-tab.is-active i { color: #fff; }
+.profile-explorer .pe-tab:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.profile-explorer .pe-panel { min-height: 250px; animation: peFade .5s ease; }
+.profile-explorer .pe-panel[hidden] { display: none; }
+@keyframes peFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.profile-explorer .pe-panel h3 { color: #fff; font-size: 26px; font-weight: 700; margin-bottom: 14px; }
+.profile-explorer .pe-label { color: var(--accent-color); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; margin-bottom: 6px; }
+.profile-explorer .pe-panel p { color: rgba(255,255,255,.92); }
+.profile-explorer .pe-panel ul { list-style: none; padding: 0; margin: 0; }
+.profile-explorer .pe-panel li { position: relative; padding: 4px 0 4px 26px; color: rgba(255,255,255,.92); }
+.profile-explorer .pe-panel li i { position: absolute; left: 0; top: 5px; color: var(--accent-color); }
+.profile-explorer .pe-credit { margin: 14px 0 0; font-size: 12px; color: rgba(255,255,255,.6); text-align: right; }
+.profile-explorer .pe-credit:empty { display: none; }
+@media (max-width: 767px) {
+  .profile-explorer .pe-inner { padding: 18px; }
+  .profile-explorer .pe-tabs { grid-template-columns: repeat(2, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .profile-explorer .pe-bg-layer { transition: none; }
+  .profile-explorer .pe-panel { animation: none; }
+}
+
+/* ---- Formation : frise cliquable ---- */
+.edu-timeline { --seg-bg: color-mix(in srgb, var(--heading-color), white 90%); }
+.edu-timeline .edu-bar { position: relative; height: 72px; margin-top: 10px; }
+.edu-timeline .edu-seg {
+  position: absolute; top: 0; height: 100%; padding: 0; cursor: pointer; box-sizing: border-box;
+  border: 3px solid transparent;
+  background-color: var(--heading-color); background-clip: padding-box; border-radius: 10px; color: var(--heading-color);
+  font-family: var(--heading-font); font-weight: 700; font-size: 16px; transition: transform .2s, background .25s;
+}
+.edu-timeline .edu-seg::before { content: ""; position: absolute; inset: 2px; border-radius: 6px; background: var(--seg-bg); transition: background .25s; }
+.edu-timeline .edu-seg span { position: relative; z-index: 1; display: block; padding: 0 8px; white-space: nowrap; }
+.edu-timeline .edu-seg[role="tab"]:hover::before { background: color-mix(in srgb, var(--accent-color), white 78%); }
+.edu-timeline .edu-seg.is-active { background-color: var(--accent-color); color: #fff; }
+.edu-timeline .edu-seg.is-active::before { background: var(--accent-color); }
+.edu-timeline .edu-seg:focus-visible { outline: 3px solid var(--accent-color); outline-offset: 3px; }
+/* EEIGM : libellé centré entre le bord gauche du bloc et le début du LTU (47,7 % de la largeur) */
+.edu-timeline #edu-tab-eeigm span { position: absolute; left: 0; top: 0; bottom: 0; width: 47.67%; display: flex; align-items: center; justify-content: center; padding: 0; }
+.edu-timeline #edu-tab-eeigm.is-parent::before { background: color-mix(in srgb, var(--accent-color), white 70%); }
+/* LTU : bloc imbriqué dans l'EEIGM (Erasmus) */
+.edu-timeline .edu-sub { border-width: 0; top: 14px; height: calc(100% - 28px); min-width: 50px; z-index: 2; font-size: 14px; background-color: var(--accent-color); }
+.edu-timeline .edu-sub::before { background: #fff; }
+.edu-timeline .edu-sub.is-active { background-color: var(--heading-color); }
+.edu-timeline .edu-sub.is-active::before { background: var(--accent-color); }
+/* Suite (après le M2) : flèche grisée et hachurée */
+.edu-timeline .edu-future { cursor: default; border-radius: 0; background-color: color-mix(in srgb, var(--heading-color), transparent 70%); clip-path: polygon(0 0, calc(100% - 23px) 0, calc(100% - 3px) 50%, calc(100% - 23px) 100%, 0 100%); }
+.edu-timeline .edu-future::before { border-radius: 0; inset: 2px; background: repeating-linear-gradient(135deg, transparent 0 7px, color-mix(in srgb, var(--heading-color), transparent 65%) 7px 9px), var(--background-color); clip-path: polygon(0 0, calc(100% - 19px) 0, calc(100% - 2px) 50%, calc(100% - 19px) 100%, 0 100%); }
+/* Année de transition : hachures + info-bulle au survol */
+.edu-timeline .edu-gap { cursor: help; background: none; }
+.edu-timeline .edu-gap::before { inset: 0; border-radius: 8px; border: 2px solid color-mix(in srgb, var(--heading-color), transparent 70%); background: repeating-linear-gradient(135deg, transparent 0 7px, color-mix(in srgb, var(--heading-color), transparent 65%) 7px 9px); }
+.edu-timeline .edu-gap::after {
+  content: attr(data-tip); position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translateX(-50%);
+  background: var(--heading-color); color: #fff; font-family: var(--default-font); font-size: 13px; font-weight: 600;
+  padding: 6px 12px; border-radius: 6px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 5;
+}
+.edu-timeline .edu-gap:hover::after, .edu-timeline .edu-gap:focus-visible::after { opacity: 1; }
+/* Axe des années : en dessous de la frise, repères pointillés depuis les débuts et fins de période */
+.edu-timeline .edu-axis { position: relative; height: 78px; }
+.edu-timeline .edu-axis::before { content: ""; position: absolute; left: 0; right: 4px; top: 38px; border-top: 2px solid var(--heading-color); }
+.edu-timeline .edu-axis::after { content: ""; position: absolute; right: -6px; top: 31px; border-left: 12px solid var(--heading-color); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+.edu-timeline .edu-lead { position: absolute; top: 4px; height: 34px; border-left: 2px dotted color-mix(in srgb, var(--heading-color), transparent 35%); }
+.edu-timeline .edu-tick { position: absolute; top: 44px; transform: translateX(-50%); font-size: 14px; font-weight: 600; color: var(--heading-color); }
+/* Panneau de détail */
+.edu-timeline .edu-panels { position: relative; margin-top: 18px; }
+.edu-timeline .edu-panel {
+  position: relative; display: grid; grid-template-columns: 1fr 260px; gap: 28px; align-items: center;
+  padding: 30px 34px; background: var(--surface-color); border-radius: 12px;
+  border-top: 4px solid var(--accent-color); box-shadow: 0 6px 24px rgba(8,0,94,.10); animation: eduFade .45s ease;
+}
+.edu-timeline .edu-panel[hidden] { display: none; }
+.edu-timeline .edu-panel::before { content: ""; position: absolute; top: -13px; left: var(--caret, 50%); width: 18px; height: 18px; background: var(--accent-color); transform: translateX(-50%) rotate(45deg); }
+@keyframes eduFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.edu-timeline .edu-period { color: var(--accent-color); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; margin-bottom: 6px; }
+.edu-timeline .edu-panel h3 { font-size: 24px; font-weight: 700; color: var(--heading-color); margin-bottom: 6px; }
+.edu-timeline .edu-school { font-weight: 600; margin-bottom: 14px; }
+.edu-timeline .edu-text p:last-child { margin-bottom: 0; }
+.edu-timeline .edu-logo-wrap { display: flex; align-items: center; justify-content: center; }
+.edu-timeline .edu-logo-wrap img { max-width: 100%; max-height: 120px; width: auto; height: auto; object-fit: contain; }
+.edu-timeline .edu-goto { background: none; border: 0; padding: 0; color: var(--accent-color); font-weight: 600; cursor: pointer; text-decoration: underline; }
+@media (max-width: 767px) {
+  .edu-timeline .edu-bar { height: 62px; }
+  .edu-timeline .edu-seg { font-size: 13px; }
+  .edu-timeline .edu-seg span { padding: 0 4px; }
+  .edu-timeline .edu-tick { font-size: 11px; }
+  .edu-timeline .edu-panel { grid-template-columns: 1fr; padding: 24px 20px; }
+  .edu-timeline .edu-logo-wrap { order: -1; justify-content: flex-start; }
+  .edu-timeline .edu-logo-wrap img { max-height: 70px; }
+  .edu-timeline .edu-panel h3 { font-size: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .edu-timeline .edu-panel { animation: none; } }
+
+/* Repères pointillés masqués (retire cette ligne pour les réafficher) */
+.edu-timeline .edu-lead { display: none; }
+.edu-timeline .edu-tick::before { content: ""; position: absolute; left: 50%; top: -12px; width: 2px; height: 10px; background: var(--heading-color); transform: translateX(-50%); }
+.edu-timeline .edu-axis { height: 82px; }
+.edu-timeline .edu-tick { top: 48px; }
+.edu-timeline .edu-tick::before { top: -17px; height: 16px; }
+
+
+/* Formation : liste à puces et galerie photo */
+.edu-timeline .edu-list { list-style: none; padding: 0; margin: 0 0 16px; }
+.edu-timeline .edu-list li { display: flex; gap: 8px; margin-bottom: 6px; }
+.edu-timeline .edu-list i { color: var(--accent-color); flex-shrink: 0; }
+.edu-timeline .edu-gallery { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 14px; }
+.edu-timeline .edu-gallery a { display: block; width: 150px; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(8,0,94,.15); }
+.edu-timeline .edu-gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+.edu-timeline .edu-gallery a:hover img { transform: scale(1.06); }
+.edu-timeline .edu-press { font-size: 14px; }
+.edu-timeline .edu-press i { color: var(--accent-color); margin-right: 4px; }
+
+.projects .project-group { scroll-margin-top: 100px; }
+
+/* Expériences : sujet officiel, sous-titres et outils */
+.features2 .exp-subject { font-style: italic; font-size: 15px; color: color-mix(in srgb, var(--default-color), transparent 25%); margin-bottom: 14px; }
+.features2 .tab-pane h4 { font-size: 17px; font-weight: 700; margin: 16px 0 8px; }
+.features2 .exp-result { padding: 10px 14px; background: color-mix(in srgb, var(--accent-color), transparent 90%); border-radius: 8px; margin: 12px 0; }
+.features2 .exp-result i { color: var(--accent-color); margin-right: 6px; }
+.features2 .exp-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.features2 .exp-tools span { font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--surface-color); border: 1px solid color-mix(in srgb, var(--heading-color), transparent 80%); color: var(--heading-color); }
+
+/* Simulations : titres des deux panneaux au-dessus de la vidéo */
+.simulations .sim-labels { display: flex; margin-bottom: 6px; font-weight: 600; color: var(--heading-color); }
+.simulations .sim-labels span { flex: 1; text-align: center; }
+.simulations .sim-figure video { width: 100%; height: auto; display: block; }
+
+
+/* Compétences : explorateur et savoir-être */
+.profile-explorer { margin-top: 10px; }
+.profile-explorer .pe-panel .pe-label { margin-top: 18px; }
+.profile-explorer .pe-panel h3 + .pe-label, .profile-explorer .pe-panel .col-lg-6 > .pe-label:first-child { margin-top: 0; }
+.competences .soft-title { font-size: 22px; font-weight: 700; margin: 40px 0 18px; }
+.competences .soft-card { height: 100%; padding: 22px; border-radius: 12px; background: var(--surface-color); box-shadow: 0 2px 18px rgba(8,0,94,.08); }
+.competences .soft-card i { font-size: 28px; color: var(--accent-color); }
+.competences .soft-card h4 { font-size: 18px; font-weight: 700; margin: 10px 0 8px; }
+.competences .soft-card p { margin: 0; font-size: 15px; }
+
+
+.profile-explorer .pe-panel .col-lg-6:first-child { padding-right: 32px; }
+.profile-explorer .pe-bg-layer.is-active { opacity: .60; }
+
