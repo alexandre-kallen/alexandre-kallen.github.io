@@ -425,3 +425,11 @@ html[lang="zh-CN"] .features2 .tab-pane h3, html[lang="zh-CN"] .projects .projec
 .profile-explorer .pe-panel .col-lg-6:first-child { padding-right: 32px; }
 .profile-explorer .pe-bg-layer.is-active { opacity: .60; }
 
+/* Page chinoise : contacts en grille 3x2, bloc centré, colonnes alignées */
+@media (min-width: 992px) {
+  .contact .row.contact-grid {
+    display: grid; grid-template-columns: repeat(3, max-content);
+    justify-content: center; column-gap: 90px; row-gap: 22px; margin: 0;
+  }
+  .contact .row.contact-grid > * { width: auto; max-width: none; padding: 0; margin: 0; }
+}
