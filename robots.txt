@@ -1,12 +1,7 @@
-# Robots ordinaires : tout le site, sauf les comptes rendus de TP
+# Robots ordinaires : les pages du site, sans les PDF (rapports, mémoires, syllabus, CV)
+# Les CSS, JS et images restent accessibles pour que Google puisse afficher les pages.
 User-agent: *
-Disallow: /assets/reports/TP1_plasma_froid_RF.pdf
-Disallow: /assets/reports/TP2_arc_electrique.pdf
-Disallow: /assets/reports/TP3_plasma_helicon.pdf
-Disallow: /assets/reports/Report_T7002T.pdf
-Disallow: /assets/reports/Report_T7004T.pdf
-Disallow: /assets/reports/Rapport_Colaminage.pdf
-Disallow: /assets/reports/Projet_D0fus.pdf
+Disallow: /assets/reports/
 Disallow: /assets/cv/
 Allow: /
 
